@@ -6,3 +6,6 @@ backup/*
 back/*
 model/*
 !model/README.md
+*.pyc
+.env/*
+data/mnt/*

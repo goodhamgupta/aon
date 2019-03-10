@@ -28,7 +28,7 @@ def read_tfrecord_use_pythonAPI(filename):
 
 
 def test_python_api():
-    tfrecord_file = '/share/zhui/mnt/demo_20.tfrecord'
+    tfrecord_file = '/data/train.tfrecord'
     read_tfrecord_use_pythonAPI(tfrecord_file)
 
 
@@ -48,6 +48,7 @@ def read_tfrecord_use_queue_runner(filename, batch_size=32):
             'image/filename': tf.FixedLenFeature([], dtype=tf.string)
         }
     )
+
     height = tf.cast(example_features['image/height'], tf.int32)
     width = tf.cast(example_features['image/width'], tf.int32)
 
@@ -73,6 +74,7 @@ def read_tfrecord_use_queue_runner(filename, batch_size=32):
         'images': image_batch,
         'groundtruth_text': groundtruth_text_batch,
     }
+
 
     return batch_tensor_dict
 
@@ -111,7 +113,7 @@ def test_queue_runner():
     exit()
 
 
-def get_batch_data(tfrecord_path, batch_size=32, mode='train'):
+def get_batch_data(tfrecord_path='data/train.tfrecord', batch_size=32, mode='train'):
     if mode=='train':
         return read_tfrecord_use_queue_runner(tfrecord_path, batch_size=batch_size)
     else:
