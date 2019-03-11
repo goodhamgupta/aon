@@ -73,8 +73,6 @@ def make_tfrecord_from_tags(unused_argv):
                     fields.TfExampleFields.transcript: dataset_util.bytes_feature(groundtruth_text.encode())
                 }
             ))
-            import pdb
-            pdb.set_trace()
             writer.write(example.SerializeToString())
             count += 1
 
