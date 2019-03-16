@@ -17,13 +17,10 @@ def write_to_file(records):
 
 
 f = open('annotation_train.txt')
-for piece in read_in_chunks(f):
-    lines = piece.split('\n')
-    results = []
-    for line in lines:
-        file_name = line.split(' ')[0]
-        groundtruth = file_name.split('_')[1]
-        results.append(f"{file_name} {groundtruth}\n")
-        #import pdb
-        #pdb.set_trace()
-    write_to_file(results)
+all_records = f.readlines()
+results = []
+for index, line in enumerate(all_records):
+    file_name = line.split(' ')[0][2:]
+    groundtruth = file_name.split('_')[1]
+    results.append(f"/home/ubuntu/shubham/aon/data/mnt/ramdisk/max/90kDICT32px/{file_name} {groundtruth}\n")
+write_to_file(results)
