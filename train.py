@@ -73,7 +73,7 @@ def main(unused_argv):
             _, loss = sess.run([train_op, loss_tensor], feed_dict=feed_dict)
             total_loss += loss 
 
-            if step % 100 == 0:
+            if step % 10000 == 0:
                 summary, output_labels, output_predict_text, decoder_inputs, decoder_targets= sess.run(
                     [summary_merge_tensor, output_labels_tensor, output_predict_text_tensor, decoder_inputs_tensor, decoder_targets_tensor],
                     feed_dict=feed_dict
@@ -97,7 +97,7 @@ def main(unused_argv):
                 print()
                 total_loss = 0.0
             
-            if step % 1000 == 0:
+            if step % 10000 == 0:
                 saver.save(sess, save_path=checkpoint_dir, global_step=global_step)
                 print('Write checkpoint {}'.format(sess.run(global_step)))
                 

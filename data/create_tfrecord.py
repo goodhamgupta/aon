@@ -64,27 +64,26 @@ def make_tfrecord_from_tags(unused_argv):
 
             try:
                 height, width, channel = cv2.imread(image_path).shape
-                assert channel == 3, '{} has {} channel'.format(
-                    image_path, channel)
                 image_bin = open(image_path, 'rb').read()
-                example = tf.train.Example(features=tf.train.Features(
-                    feature={
-                        fields.TfExampleFields.image_encoded: dataset_util.bytes_feature(image_bin),
-                        fields.TfExampleFields.height: dataset_util.int64_feature(height),
-                        fields.TfExampleFields.width: dataset_util.int64_feature(width),
-                        fields.TfExampleFields.filename: dataset_util.bytes_feature(filename.encode()),
-                        fields.TfExampleFields.transcript: dataset_util.bytes_feature(groundtruth_text.encode())
-                    }
-                ))
-                writer.write(example.SerializeToString())
-                count += 1
-
-                if count % 1000000 == 0:
-                    print(count)
             except Exception as e:
                 print(e)
                 print("Failed for filename: ", filename)
                 continue
+
+            example = tf.train.Example(features=tf.train.Features(
+                feature={
+                    fields.TfExampleFields.image_encoded: dataset_util.bytes_feature(image_bin),
+                    fields.TfExampleFields.height: dataset_util.int64_feature(height),
+                    fields.TfExampleFields.width: dataset_util.int64_feature(width),
+                    fields.TfExampleFields.filename: dataset_util.bytes_feature(filename.encode()),
+                    fields.TfExampleFields.transcript: dataset_util.bytes_feature(groundtruth_text.encode())
+                }
+            ))
+            writer.write(example.SerializeToString())
+            count += 1
+
+            if count % 1000 == 0:
+                print(count)
 
     writer.close()
     print('{} example created!'.format(count))

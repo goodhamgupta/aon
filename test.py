@@ -1,5 +1,5 @@
 import cv2
-import tensorflow as tf 
+import tensorflow as tf
 from model_aon import get_init_op
 import os
 
@@ -37,10 +37,11 @@ def test_single_picture():
     print('Restore model from {} successful, step {}'.format(
         save_path, sess.run(global_step)))
     if FLAGS.mode == 'single':
+        image_path = FLAGS.image_path
         pred_text = sess.run(output_eval_text_tensor, feed_dict={
-            image_placeholder: load_image(FLAGS.image_path).reshape([1, 100, 100, 3])
+            image_placeholder: load_image(image_path).reshape([1, 100, 100, 3])
         })
-        print(pred_text)
+        print("Prediction: ", pred_text[0].decode())
     elif FLAGS.mode == 'tags':
         num_total = 0
         num_correct = 0
