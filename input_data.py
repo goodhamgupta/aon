@@ -52,7 +52,7 @@ def read_tfrecord_use_queue_runner(filename, batch_size=32):
     height = tf.cast(example_features['image/height'], tf.int32)
     width = tf.cast(example_features['image/width'], tf.int32)
 
-    image = tf.image.decode_jpeg(example_features['image/encoded'], channels=3)
+    image = tf.image.decode_image(example_features['image/encoded'], channels=3)
     image = tf.reshape(image, [height, width, 3])
     image = tf.image.resize_images(image, [100, 100]) / 128.0 - 1  # normalize to [-1, 1)
 
