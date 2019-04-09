@@ -56,9 +56,12 @@ def test_single_picture():
                 pred_text = sess.run(output_eval_text_tensor, feed_dict={
                     image_placeholder: image.reshape([1, 100, 100, 3])
                 })
-                print('{} ==> {}'.format(gt, pred_text))
+                prediction = pred_text[0]
                 num_total += 1
-                num_correct += (gt.lower() == pred_text[0].decode())
+                if gt != prediction.decode():
+                    print('{} ==> {}'.format(gt, prediction))
+                else:
+                    num_correct += 1
         print('Accu: {}/{}={}'.format(num_correct,
                                       num_total, num_correct / num_total))
         print('{}'.format(save_path))
