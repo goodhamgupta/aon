@@ -19,6 +19,7 @@ def load_image(image_path):
 
 
 def test_single_picture():
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     save_path = tf.train.latest_checkpoint(FLAGS.exp_dir)
     meta_file_path = save_path + '.meta'
     tf.reset_default_graph()
@@ -41,7 +42,9 @@ def test_single_picture():
         pred_text = sess.run(output_eval_text_tensor, feed_dict={
             image_placeholder: load_image(image_path).reshape([1, 100, 100, 3])
         })
+        print("******************************************")
         print("Prediction: ", pred_text[0].decode())
+        print("******************************************")
     elif FLAGS.mode == 'tags':
         num_total = 0
         num_correct = 0

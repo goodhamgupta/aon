@@ -9,3 +9,7 @@ model/*
 *.pyc
 .env/*
 data/mnt/*
+*.png
+*.jpg
+*.jpeg
+*.zip

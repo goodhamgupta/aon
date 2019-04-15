@@ -4,7 +4,7 @@ Tensorflow implementation of [AON: Towards Arbitrarily-Oriented Text Recognition
 
 # Pretrained Model
 
-The model has been trained to 390000 iterations on a p2.xlarge instance. The training process took about two days. The checkpoints for the model are available [here](https://drive.google.com/file/d/1fol58YSoxrErbkQI-d8zpnOSH4WyigVy/view?usp=sharing)
+The model has been trained to 390000 iterations on a p2.xlarge instance. The training process took about four days. The checkpoints for the model are available [here](https://drive.google.com/file/d/1fol58YSoxrErbkQI-d8zpnOSH4WyigVy/view?usp=sharing)
 
 # Credits
 
